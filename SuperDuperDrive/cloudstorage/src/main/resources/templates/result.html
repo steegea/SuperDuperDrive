@@ -1,0 +1,134 @@
+<!--HTML file for displaying success, error, or no data messages-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
+
+        <title>Result</title>
+    </head>
+    <body class="p-3 mb-2 bg-light text-black">
+        <div class="container justify-content-center w-50 p-3" style="margin-top: 5em;">
+
+            <!--Successful Submission Messages-->
+            <div class="alert alert-success fill-parent" th:if="${successfulFileUpload}">
+                <h1 class="display-5">File Upload Complete</h1><br>
+                <span th:text="${successfulFileUpload}" id="successfulFileUpload"></span>
+                <span><br/><br/>Click <a class="homeButton" th:href="@{/home}">here</a> to continue.</span>
+            </div>
+
+            <div class="alert alert-success fill-parent" th:if="${successfulNoteSubmission}">
+                <h1 class="display-5">Note Created</h1><br/>
+                <span th:text="${successfulNoteSubmission}" id="successfulNoteSubmission"></span>
+                <span><br/><br/> Click <a class="homeButton" th:href="@{/home}">here</a> to continue.</span>
+            </div>
+
+            <div class="alert alert-success fill-parent" th:if="${successfulCredentialSubmission}">
+                <h1 class="display-5">Credentials Created</h1><br/>
+                <span th:text="${successfulCredentialSubmission}" id="successfulCredentialSubmission"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+            <!--Successful Deletion Messages-->
+            <div class="alert alert-success fill-parent" th:if="${successfulFileDeletion}">
+                <h1 class="display-5">File Deleted</h1><br/>
+                <span th:text="${successfulFileDeletion}" id ="successfulFileDeletion"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+            <div class="alert alert-success fill-parent" th:if="${successfulNoteDeletion}">
+                <h1 class="display-5">Note Deleted</h1><br/>
+                <span th:text="${successfulNoteDeletion}" id="successfulNoteDeletion"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+            <div class="alert alert-success fill-parent" th:if="${successfulCredentialDeletion}">
+                <h1 class="display-5">Credentials Deleted</h1><br/>
+                <span th:text="${successfulCredentialDeletion}" id="successfulCredentialDeletion"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+            <!--Successful Edit Messages-->
+            <div class="alert alert-success fill-parent" th:if="${successfulNoteEdit}">
+                <h1 class="display-5">Note Changes Saved</h1><br/>
+                <span th:text="${successfulNoteEdit}" id="successfulNoteEdit"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+            <div class="alert alert-success fill-parent" th:if="${successfulCredentialEdit}">
+                <h1 class="display-5">Credential Changes Saved</h1><br/>
+                <span th:text="${successfulCredentialEdit}" id="successfulCredentialEdit"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+
+            <!--Submission Errors-->
+            <div class="alert alert-danger fill-parent" th:if="${duplicateFileError}">
+                <h1 class="display-5">Error -- Duplicate Files</h1><br/>
+                <span th:text="${duplicateFileError}" id="duplicateFileError"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+            <div class="alert alert-danger fill-parent" th:if="${noteSubmissionError}">
+                <h1 class="display-5">Error!</h1><br/>
+                <span th:text="${noteSubmissionError}"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+            <div class="alert alert-danger fill-parent" th:if="${credentialSubmissionError}">
+                <h1 class="display-5">Error!</h1><br/>
+                <span th:text="${credentialSubmissionError}"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+            <!--Deletion Errors-->
+            <div class="alert alert-danger fill-parent" th:if="${fileDeletionError}">
+                <h1 class="display-5">Error!</h1><br/>
+                <span th:text="${fileDeletionError}"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+            <div class="alert alert-danger fill-parent" th:if="${noteDeletionError}">
+                <h1 class="display-5">Error!</h1><br/>
+                <span th:text="${noteDeletionError}"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+            <div class="alert alert-danger fill-parent" th:if="${credentialDeletionError}">
+                <h1 class="display-5">Error!</h1><br/>
+                <span th:text="${credentialDeletionError}"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+            <!--Editing Errors-->
+            <div class="alert alert-danger fill-parent" th:if="${noteEditError}">
+                <h1 class="display-5">Error!</h1><br/>
+                <span th:text="${noteEditError}"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+            <div class="alert alert-danger fill-parent" th:if="${credentialEditError}">
+                <h1 class="display-5">Error!</h1><br/>
+                <span th:text="${credentialEditError}"></span>
+                <span><br/><br/> Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+            </div>
+
+
+            <!--For quick testing-->
+            <div class="container justify-content-center w-50 p-3" style="margin-top: 5em;">
+                <div class="alert alert-success fill-parent" th:if="${param.success}">
+                    <h1 class="display-5">Success</h1>
+                    <span>Your changes were successfully saved. Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+                </div>
+                <div class="alert alert-danger fill-parent" th:if="${param.error}">
+                    <h1 class="display-5">Error</h1>
+                    <span>Your changes were not saved. Click <a th:href="@{/home}" class="homeButton">here</a> to continue.</span>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+.emptyTabBanner{
+    text-align: center;
+    margin: 0 auto;
+    white-space: nowrap;
+}
+
+.shortBanner{
+    width: 250px;
+}
+
+.longBanner{
+    width: 325px;
+}
+
+.deleteButton{
+    color: white !important;
+}
