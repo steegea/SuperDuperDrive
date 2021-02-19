@@ -112,6 +112,10 @@ class CloudStorageApplicationTests {
 		loginPage.loginClick(username, password);
 	}
 
+	public void executeLoginAfterSuccessfulSignup(String username, String password) throws InterruptedException {
+		loginPage.loginClick(username, password);
+	}
+
 	//File upload helper method
 	public void executeFileUpload() throws InterruptedException {
 		homePage.goToFiles();
@@ -156,21 +160,21 @@ class CloudStorageApplicationTests {
 	public void testSignupAndLogin_Successful() throws InterruptedException {
 
 		//Sign-up test code
-		String successfulSignUpMessage = "You successfully signed up! Please continue to the login page.";
+		String successfulSignUpMessage = "You have successfully signed up! Please log-in.";
 
 		executeSignup(firstName, lastName, username, password);
 
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(webDriver -> webDriver.findElement(By.id("signupSuccessMessage")));
 
-		String returnedSignupMessage = signupPage.getSignupSuccessMessage();
+		String returnedSignupMessage = loginPage.getSignupSuccessMessage();
 
 		assertEquals(successfulSignUpMessage, returnedSignupMessage);
 
 		Thread.sleep(2000);
 
 		//Call to login helper method
-		executeLogin(username, password);
+		executeLoginAfterSuccessfulSignup(username, password);
 
 		Thread.sleep(2000);
 
@@ -268,6 +272,8 @@ class CloudStorageApplicationTests {
 		homePage.goToFiles();
 
 		assertEquals(1, numberOfFiles);
+
+		Thread.sleep(2000);
 
 	}
 

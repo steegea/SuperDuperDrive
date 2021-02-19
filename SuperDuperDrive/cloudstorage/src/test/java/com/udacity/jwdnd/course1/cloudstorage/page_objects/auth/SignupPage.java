@@ -26,9 +26,6 @@ public class SignupPage {
     @FindBy(id = "signupButton")
     private WebElement signupButton;
 
-    @FindBy(id = "signupSuccessMessage")
-    private WebElement signupSuccessMessage;
-
     @FindBy(id = "signupErrorMessage")
     private WebElement signupErrorMessage;
 
@@ -52,9 +49,6 @@ public class SignupPage {
         Thread.sleep(2000);
     }
 
-    public String getSignupSuccessMessage(){
-        return signupSuccessMessage.getText();
-    }
 
     public String getSignupErrorMessage(){
         return signupErrorMessage.getText();

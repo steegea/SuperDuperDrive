@@ -13,6 +13,10 @@
             <h1 class="display-5">Login</h1>
             <form action="#" th:action="@{/login}" method="POST">
 
+                <div id="signupSuccessMessage" th:if="${param.successfulSignup}" class="alert alert-success">
+                    <span>You have successfully signed up! Please log-in.</span>
+                </div>
+
                 <div id="loginErrorMessage" th:if="${param.error}" class="alert alert-danger">
                     <span>Invalid username and/or password!</span>
                 </div>

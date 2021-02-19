@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -51,11 +53,13 @@ public class FileElements {
     private WebElement noFilesMessage;
 
     //Variables used for File tests
-    private final String homeProperty = System.getProperty("user.home");
-    private final String fileDownloadDirectory = System.getProperty("user.dir");
+    private final String currentDirectory = System.getProperty("user.dir");
+    private final String fileDownloadDirectory = currentDirectory;
+
+    private Logger logger = LoggerFactory.getLogger(FileElements.class);
 
     private String filename = "HelloWorld.txt";
-    private final String uploadFilePath = homeProperty + File.separator + "Documents" + File.separator + filename;
+    private final String uploadFilePath = currentDirectory + File.separator + filename;
     private final String downloadFilePath = fileDownloadDirectory + File.separator + filename;
 
     Path downloadedFilePath = Paths.get(fileDownloadDirectory, filename);
@@ -69,6 +73,8 @@ public class FileElements {
 
     public void uploadNewFile() throws InterruptedException {
         Thread.sleep(1500);
+
+        logger.info("Current Directory: " + currentDirectory);
 
         fileToUploadButton.sendKeys(uploadFilePath);
 
