@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.controllers.core;
 
+import com.udacity.jwdnd.course1.cloudstorage.constants.WebpageMessages;
 import com.udacity.jwdnd.course1.cloudstorage.forms.CredentialForm;
 import com.udacity.jwdnd.course1.cloudstorage.forms.NoteForm;
 import com.udacity.jwdnd.course1.cloudstorage.models.Credential;
@@ -30,7 +31,6 @@ public class HomeController {
     private CredentialService credentialService;
     private UserService userService;
     private EncryptionService encryptionService;
-
 
     public HomeController(FileService fileService,
                           NoteService noteService,
@@ -70,17 +70,21 @@ public class HomeController {
 
         model.addAttribute("encryptionService", encryptionService);
 
+        String noFilesMessage = WebpageMessages.NO_FILES_MESSAGE;
+        String noNotesMessage = WebpageMessages.NO_NOTES_MESSAGE;
+        String noCredentialsMessage = WebpageMessages.NO_CREDENTIALS_MESSAGE;
+
         if(files.size() == 0 || notes.size() == 0 || credentials.size() == 0){
             if(files.size() == 0){
-                model.addAttribute("noFiles", "You do not have any files.");
+                model.addAttribute("noFiles", noFilesMessage);
             }
 
             if(notes.size() == 0){
-                model.addAttribute("noNotes", "You do not have any notes.");
+                model.addAttribute("noNotes", noNotesMessage);
             }
 
             if(credentials.size() == 0){
-                model.addAttribute("noCredentials", "You do not have any credential entries.");
+                model.addAttribute("noCredentials", noCredentialsMessage);
             }
         }
 

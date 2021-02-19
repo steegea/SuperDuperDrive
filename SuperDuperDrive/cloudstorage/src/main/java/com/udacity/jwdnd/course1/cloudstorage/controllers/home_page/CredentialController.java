@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.controllers.home_page;
 
+import com.udacity.jwdnd.course1.cloudstorage.constants.WebpageMessages;
 import com.udacity.jwdnd.course1.cloudstorage.forms.CredentialForm;
 import com.udacity.jwdnd.course1.cloudstorage.models.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.models.User;
@@ -39,21 +40,25 @@ public class CredentialController {
         User user = userService.getUser(username);
         Integer userID = user.getUserID();
 
+        String successfulCredentialCreationMessage = WebpageMessages.SUCCESSFUL_CREDENTIAL_CREATION_MESSAGE;
+        String successfulCredentialEditMessage = WebpageMessages.SUCCESSFUL_CREDENTIAL_EDIT_MESSAGE;
+        String credentialSubmissionErrorMessage = WebpageMessages.CREDENTIAL_SUBMISSION_ERROR;
+
         Credential credential = new Credential(credentialForm.getCredentialID(), credentialForm.getUrl(),
                 credentialForm.getUsername(), credentialForm.getKey(), credentialForm.getPassword(), userID);
 
         if(credential.getCredentialID() == 0){
-            model.addAttribute("successfulCredentialSubmission", "Your credential entry has been added!");
+            model.addAttribute("successfulCredentialSubmission", successfulCredentialCreationMessage);
             credentialService.addCredential(credential);
         }
 
         else if(credential.getCredentialID() > 0){
-            model.addAttribute("successfulCredentialEdit", "Your changes have been saved!");
+            model.addAttribute("successfulCredentialEdit", successfulCredentialEditMessage);
             credentialService.updateCredential(credential);
         }
 
         else{
-            model.addAttribute("credentialSubmissionError", "There was an issue adding your credential entry!");
+            model.addAttribute("credentialSubmissionError", credentialSubmissionErrorMessage);
         }
 
 
@@ -63,13 +68,16 @@ public class CredentialController {
     @GetMapping("/delete")
     public String deleteCredential(@RequestParam("id") int credentialID, Model model) {
 
+        String successfulCredentialDeletionMessage = WebpageMessages.SUCCESSFUL_CREDENTIAL_DELETION_MESSAGE;
+        String credentialDeletionErrorMessage = WebpageMessages.CREDENTIAL_DELETION_ERROR;
+
         if (credentialID > 0) {
-            model.addAttribute("successfulCredentialDeletion", "The credential entry has been successfully deleted!");
+            model.addAttribute("successfulCredentialDeletion", successfulCredentialDeletionMessage);
             credentialService.deleteCredential(credentialID);
         }
 
         else{
-            model.addAttribute("credentialDeletionError", "THe credential entry could not be deleted!");
+            model.addAttribute("credentialDeletionError", credentialDeletionErrorMessage);
         }
 
         return "result";

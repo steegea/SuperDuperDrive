@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.controllers.home_page;
 
+import com.udacity.jwdnd.course1.cloudstorage.constants.WebpageMessages;
 import com.udacity.jwdnd.course1.cloudstorage.forms.NoteForm;
 import com.udacity.jwdnd.course1.cloudstorage.models.Note;
 import com.udacity.jwdnd.course1.cloudstorage.models.User;
@@ -37,22 +38,26 @@ public class NoteController {
         User user = userService.getUser(username);
         Integer userID = user.getUserID();
 
+        String successfulNoteCreationMessage = WebpageMessages.SUCCESSFUL_NOTE_CREATION_MESSAGE;
+        String successfulNoteEditMessage = WebpageMessages.SUCCESSFUL_NOTE_EDIT_MESSAGE;
+        String noteSubmissionError = WebpageMessages.NOTE_SUBMISSION_ERROR;
+
         Note note = new Note(noteForm.getNoteID(), noteForm.getNoteTitle(),
                 noteForm.getNoteDescription(), userID);
 
 
         if(note.getNoteID() == 0){
-            model.addAttribute("successfulNoteSubmission", "Your note has been added!");
+            model.addAttribute("successfulNoteSubmission", successfulNoteCreationMessage);
             noteService.addNote(note);
         }
 
         else if(note.getNoteID() > 0){
-            model.addAttribute("successfulNoteEdit", "Your note changes have been saved!");
+            model.addAttribute("successfulNoteEdit", successfulNoteEditMessage);
             noteService.updateNote(note);
         }
 
         else{
-            model.addAttribute("noteSubmissionError", "There was an issue adding your note!");
+            model.addAttribute("noteSubmissionError", noteSubmissionError);
         }
 
         return "result";
@@ -61,14 +66,17 @@ public class NoteController {
     @GetMapping("/delete")
     public String deleteNote(@RequestParam("id") int noteID, Model model) {
 
+        String successfulNoteDeletionMessage = WebpageMessages.SUCCESSFUL_NOTE_DELETION_MESSAGE;
+        String noteDeletionError = WebpageMessages.NOTE_DELETION_ERROR;
+
         if (noteID > 0) {
-            model.addAttribute("successfulNoteDeletion", "The note has been successfully deleted!");
+            model.addAttribute("successfulNoteDeletion", successfulNoteDeletionMessage);
             noteService.deleteNote(noteID);
 
         }
 
         else{
-            model.addAttribute("noteDeletionError", "ERROR: The note could not be deleted!");
+            model.addAttribute("noteDeletionError", noteDeletionError);
         }
 
         return "result";

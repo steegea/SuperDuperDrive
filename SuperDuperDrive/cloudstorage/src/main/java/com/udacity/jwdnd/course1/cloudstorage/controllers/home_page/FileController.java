@@ -1,9 +1,11 @@
 package com.udacity.jwdnd.course1.cloudstorage.controllers.home_page;
 
 
+import com.udacity.jwdnd.course1.cloudstorage.constants.WebpageMessages;
 import com.udacity.jwdnd.course1.cloudstorage.models.User;
 import com.udacity.jwdnd.course1.cloudstorage.services.home_page.FileService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import org.apache.juli.WebappProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -34,17 +36,17 @@ public class FileController {
         User user = userService.getUser(username);
         String filename = mpFile.getOriginalFilename();
 
-        if (mpFile.isEmpty()) {
-            model.addAttribute("emptyFileError", "You did not select a file to upload! Please choose a file.");
-        }
+        String successfulFileUploadSuffix = WebpageMessages.SUCCESSFUL_FILE_CREATION_SUFFIX;
+        String duplicateFileError = WebpageMessages.DUPLICATE_FILE_ERROR;
 
-        else if(!fileService.isFilenameAvailable(filename)){
-            model.addAttribute("duplicateFileError", "A file with the given name already exists! Please rename the file or upload a different file.");
+
+        if(!fileService.isFilenameAvailable(filename)){
+            model.addAttribute("duplicateFileError", duplicateFileError);
         }
 
         else{
             fileService.uploadNewFile(mpFile, user.getUserID());
-            model.addAttribute("successfulFileUpload", "\"" + filename + "\" has been uploaded successfully!");
+            model.addAttribute("successfulFileUpload", "\"" + filename + "\"" + successfulFileUploadSuffix);
         }
 
         return "result";
@@ -53,13 +55,16 @@ public class FileController {
     @GetMapping("/delete")
     public String deleteFile(@RequestParam(value = "id", required = false) Integer fileID, Model model){
 
+        String successfulFileDeletionMessage = WebpageMessages.SUCCESSFUL_FILE_DELETION_MESSAGE;
+        String fileDeletionError = WebpageMessages.FILE_DELETION_ERROR;
+
         if(fileID > 0){
-            model.addAttribute("successfulFileDeletion", "The file has been deleted successfully!");
+            model.addAttribute("successfulFileDeletion", successfulFileDeletionMessage);
             fileService.deleteFileByID(fileID);
         }
 
         else{
-            model.addAttribute("fileDeletionError", "The file could not be deleted!");
+            model.addAttribute("fileDeletionError", fileDeletionError);
         }
 
         return "result";

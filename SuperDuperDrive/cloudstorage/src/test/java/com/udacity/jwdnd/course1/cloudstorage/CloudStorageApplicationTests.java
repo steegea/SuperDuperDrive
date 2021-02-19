@@ -485,7 +485,7 @@ class CloudStorageApplicationTests {
 	@Order(15)
 	public void testEditCredential() throws InterruptedException {
 
-		String successfulCredentialEditMessage = "Your changes have been saved!";
+		String successfulCredentialEditMessage = "Your credential changes have been saved!";
 		
 		executeLogin(username, password);
 
